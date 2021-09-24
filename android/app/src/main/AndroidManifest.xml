@@ -2,7 +2,7 @@
     package="com.example.planning">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="planning"
+        android:label="Planning Sciences UPPA"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
