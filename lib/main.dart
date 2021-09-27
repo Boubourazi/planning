@@ -34,6 +34,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   SharedPreferences? _prefs;
+  TextEditingController textEditingController = TextEditingController();
 
   @override
   void initState() {
@@ -80,13 +81,38 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: _prefs?.getBool("seen") ?? true
           ? IntroductionScreen(
-              showDoneButton: false,
+              done: const Icon(Icons.check),
+              showNextButton: true,
+              onDone: () {
+                _prefs?.setBool("seen", true);
+                setState(() {});
+              },
+              showDoneButton: textEditingController.text.isEmpty,
+              next: const Icon(Icons.arrow_forward),
               pages: [
                 PageViewModel(
-                    title: "Introduction",
-                    body:
-                        "Afin d'utiliser l'application il vous faudra entrer le nom de votre promotion tel qu'affiché dans la recherche sur l'hypperplanning"),
+                  title: "Introduction",
+                  body:
+                      "Afin d'utiliser l'application il vous faudra entrer le nom de votre promotion tel qu'affiché dans la recherche sur l'hypperplanning",
+                ),
+                PageViewModel(
+                  title: "Promotion",
+                  bodyWidget: TextField(
+                    controller: textEditingController,
+                    onChanged: (value) {
+                      _prefs?.setString("search", value);
+                    },
+                  ),
+                )
               ],
+              dotsDecorator: const DotsDecorator(
+                size: Size(10.0, 10.0),
+                color: Color(0xFFBDBDBD),
+                activeSize: Size(22.0, 10.0),
+                activeShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                ),
+              ),
             )
           : InAppWebView(
               onWebViewCreated: (controller) {
