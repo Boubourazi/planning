@@ -79,11 +79,12 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: const Icon(Icons.settings)),
         ],
       ),
-      body: _prefs?.getBool("seen") ?? true
+      body: !(_prefs?.getBool("seen") ?? false)
           ? IntroductionScreen(
               done: const Icon(Icons.check),
               showNextButton: true,
               onDone: () {
+                _prefs?.setString("search", textEditingController.text);
                 _prefs?.setBool("seen", true);
                 setState(() {});
               },
@@ -99,9 +100,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   title: "Promotion",
                   bodyWidget: TextField(
                     controller: textEditingController,
-                    onChanged: (value) {
-                      _prefs?.setString("search", value);
-                    },
                   ),
                 )
               ],
