@@ -1,11 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.boubourazi.planning">
-    <uses-permission android:name="android.permission.INTERNET"/>
+        <uses-permission android:name="android.permission.INTERNET"/>
+
    <application
-        android:label="Planning Sciences UPPA"
+        android:label="Planning"
         android:icon="@mipmap/launcher_icon">
         <activity
-            android:name="com.boubourazi.planning.MainActivity"
+            android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
